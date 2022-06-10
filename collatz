@@ -1,0 +1,83 @@
+<html>
+
+<head>
+
+    <title> Explore Collatz Series </title>
+
+    <link rel='stylesheet' type='text/css' media='screen' href='https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css'> 
+
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <style>
+        .poop {
+          border: 2px solid powderblue;
+          padding: 30px;
+          font-size: 300%;
+        }
+        </style>
+</head>
+
+<body>
+
+    <h1 class="poop">   A Collatz series is a list of integers that follow this formula:
+        for any starting integer, if it is odd, it is multiplied by three
+        and then increased by 1. If it is even, it is halved. The resulting
+        numbers then follow the same rule, gradually decreasing to 1 (and then
+        looping). The following program takes a number and goes through all
+        the computations until it reaches the number 1. It lists all the numbers
+        in the series, the highest value, and the number of computations.</h1>
+
+<br>
+<div class="poop">
+<p>Enter an integer below</p>
+
+<textarea name="input_text" id="input_text" placeholder="Enter your an integer...."></textarea>
+
+<br>
+
+<button id="run" type="button" class="button is-primary" pys-onClick="count">Enter</button>
+<button id="clear" type="button" class="button is-danger" pys-onClick="clear">Clear</button>
+
+<p id="info">Output Below</p>
+
+<p id = 'output'></p>
+</div>   
+</body>
+
+<py-script>
+
+input_text = Element("input_text")    
+
+op = Element("output")
+inf = Element("info")
+display=[]
+
+def clear(*args, **kwargs):
+    input_text.clear()
+    op.write("")
+
+def count(*args, **kwargs):
+    num = int(input_text.value)    
+    tally=0
+    peak=0
+    prenum=num
+    while num > 1:
+        if num>peak:
+            peak=num
+        if (num % 2)==0:
+            num=int(num/2)
+            display.append(num)
+        else:
+            num=(3*num)+1
+            display.append(num)
+        tally=tally+1
+     #   print(" ")   
+     #   print("There were "+str(tally)+" computations for the number "+str(prenum)+" and "+str(peak)+" was the highest number in the series.")
+        inf.write("There were "+ str(tally)+ " computations for the number "+ str(prenum)+ " and "+ str(peak)+ " was the highest number in the series.")
+     #   inf.write(str(tally))
+        op.write(display)
+</py-script>
+
+
+</html>
