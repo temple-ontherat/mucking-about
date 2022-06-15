@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/brython@3.10.5/brython.min.js">
+        </script>
+        <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/brython@3.10.5/brython_stdlib.js">
+        </script>
+    </head>
+    
+    <body onload="brython()">
+        <h2>A Collatz series is a list of integers that follow this formula:
+            for any starting integer, if it is odd, it is multiplied by three
+            and then increased by 1. If it is even, it is halved. The resulting
+            numbers then follow the same rule, gradually decreasing to 1 (and then
+            looping). The following program takes a number and goes through all
+            the computations until it reaches the number 1. It lists all the numbers
+            in the series, the highest value, and the number of computations.</h2>
+        <p id="test">Enter an integer below and press the button. &nbsp</p>
+            <script type="text/python">
+            
+            from browser import document       
+            def click(ev):
+                document['result'].clear()
+                document['result2'].clear()
+                num=document['zone'].value
+                num=int(num)
+                display=[] 
+                display.append(num)
+                display.append(" ")
+                peak=0
+                if num==1:
+                   peak=1
+                tally=0
+                prenum=num
+                while num > 1:
+                  if num>peak:
+                      peak=num
+                  if (num % 2)==0:
+                      num=int(num/2)
+                      display.append(num)
+                      display.append(" ")
+                  else:
+                      num=(3*num)+1
+                      display.append(num)
+                      display.append(" ")
+                  tally=tally+1
+                document['result2'] <= "There were "+ str(tally)+ " computations for the number "+ str(prenum)+ " and "+ str(peak)+ " was the highest number in the series."
+            
+                document['result'] <= display
+            # bind event 'click' on button to function echo
+            document["echo"].bind("click", click)
+        
+    
+    
+    </script>
+    <input id="zone">
+    <button id="echo">Enter</button>
+    <p id="result"></p>
+    <p id="result2"></p>
+    </body>
+    </html>
